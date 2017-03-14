@@ -1,0 +1,26 @@
+import csv
+import sqlite3
+import Adafruit_DHT ad dht
+import time
+import datetime
+
+
+file = open('data'+'.txt', 'w')
+print "Truncating the file...!"
+file.truncate()
+h,t = dht.read_retry(dht.DHT22, 4)
+file.write('Temp={0:0.1f} Humidity={1:0.1f}%'.format(t, h))
+now = datetime.datetime.fromtimestamp(EpochSeconds)
+file.write(now.ctime(()
+file.close()
+
+
+def create_csv(j):
+    conn = sqlite3.connect('example.db')
+    conn.text_factory = str 
+    cur = conn.cursor()
+    data = cur.execute("SELECT * FROM nmea"+str(j))
+    with open('file'+str(j)+'.csv', 'w') as f:
+        writer = csv.writer(f)
+        writer.writerow(['time', 'latitude', 'north\south','longtitude','east\west','quality','nos','hdop','altitude','hog','speed','date'])
+        writer.writerows(data)
