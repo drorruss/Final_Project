@@ -7,10 +7,13 @@ import datetime
 file = open('data'+'.txt', 'w')
 print "Truncating the file...!"
 file.truncate()
-h,t = dht.read_retry(dht.DHT22, 4)
-file.write('Temp={0:0.1f}, Humidity={1:0.1f}%'.format(t, h))
-now = datetime.datetime.now()    // 2014-09-26  16:34:40
-file.write('Date=now.strftime("%Y-%m-%d"), Time=now.strftime("%H:%M")')
+var = 1
+while var == 1 :
+    h,t = dht.read_retry(dht.DHT22, 4)
+    file.write('Temprature={0:0.1f}, Humidity={1:0.1f}%'.format(t, h))
+    now = datetime.datetime.now()    // 2014-09-26  16:34:40
+    file.write('Date=now.strftime("%Y-%m-%d"), Time=now.strftime("%H:%M")')
+
 file.close()
 
 
@@ -23,3 +26,18 @@ def create_csv(file):
         writer = csv.writer(new)
         writer.writerow(['Temprature','Humidity', 'Date','Time'])
         writer.writerows(data)
+        
+        
+        // פותחים קובץ חדש לכתיבה TXT 
+        // בודקים אם הקובץ נוצר, קוראים את הנתונים מהחיישן וכותבים אותם לתוך הקובץ
+        // נקבל את הזמן הנוכחי וכותבים אותו לתוך הקובץ
+        // קובץ נסגר
+        
+        // נצור קובץ אקסל, נשאב את הנתונים מהקובץ טקסט לתוך העמודות הנכונות
+        // כרגע יש קובץ אקסל עם הנתון שקראנו מהחיישן עם הזמן הנוכחי
+        
+        
+def (file):
+    
+        
+        
