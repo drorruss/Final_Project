@@ -11,7 +11,7 @@ var = 1
 while var == 1 :
     h,t = dht.read_retry(dht.DHT22, 4)
     check_exe(h,t)
-    file.write('Temprature={0:0.1f}, Humidity={1:0.1f}%'.format(t, h))
+    file.write('Temprature={0:0.1f}*C, Humidity={1:0.1f}%'.format(t, h))
     now = datetime.datetime.now()    // 2014-09-26  16:34:40
     file.write('Date=now.strftime("%Y-%m-%d"), Time=now.strftime("%H:%M")')
 
@@ -39,9 +39,19 @@ def create_csv(file):
         
         
 def check_exe(h,t):
-    Temprature={0:0.1f}, Humidity={1:0.1f}%.format(t, h)
+   Temprature={0:0.1f}, Humidity={1:0.1f}.format(t, h)
+   if (Temprature >35 & Temprature < 36.6) | (Temprature < 38 & Temprature > 37.2):
+     print "Temprature Exeption - Please go to the baby !! "    \\ שליחת  הודעה
+   if Temprature < 35 | Temprature > 38:
+     print "Temprature Exeption - Please go rapidly to the baby !! "    \\ שליחת  הודעה
+   if (Humidity > 25 & Humidity < 30) | (Humidity > 50 & Humidity < 55):
+     print "Humidity Exeption - Please go to the baby !!"   \\ שליחת  הודעה
+   if Humidity < 25 | Humidity > 55:
+     print "Humidity Exeption - Please go rapidly to the baby !!"   \\ שליחת  הודעה
     
-	
+    
+	//מנגנון שליחת הודעות sms
+	//https://www.twilio.com/docs/quickstart/python/sms/sending-via-rest
     
         
         
