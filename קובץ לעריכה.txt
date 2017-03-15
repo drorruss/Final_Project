@@ -10,6 +10,7 @@ file.truncate()
 var = 1
 while var == 1 :
     h,t = dht.read_retry(dht.DHT22, 4)
+    check_exe(h,t)
     file.write('Temprature={0:0.1f}, Humidity={1:0.1f}%'.format(t, h))
     now = datetime.datetime.now()    // 2014-09-26  16:34:40
     file.write('Date=now.strftime("%Y-%m-%d"), Time=now.strftime("%H:%M")')
@@ -37,7 +38,10 @@ def create_csv(file):
         // כרגע יש קובץ אקסל עם הנתון שקראנו מהחיישן עם הזמן הנוכחי
         
         
-def (file):
+def check_exe(h,t):
+    Temprature={0:0.1f}, Humidity={1:0.1f}%.format(t, h)
+    
+	
     
         
         
