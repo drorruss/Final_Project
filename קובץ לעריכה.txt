@@ -29,6 +29,8 @@ def create_csv(file):
         writer.writerow(['Temprature','Humidity', 'Date','Time'])
         writer.writerows(data)
         
+	
+	
         
         // פותחים קובץ חדש לכתיבה TXT 
         // בודקים אם הקובץ נוצר, קוראים את הנתונים מהחיישן וכותבים אותם לתוך הקובץ
