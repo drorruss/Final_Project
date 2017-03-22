@@ -1,6 +1,6 @@
 import csv
 import sqlite3
-import Adafruit_DHT ad dht
+import Adafruit_DHT as dht
 import datetime
 
 
