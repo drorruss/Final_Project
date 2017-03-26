@@ -16,7 +16,7 @@ while var <= 5 :     # לבדוק באמת שכל הנתונים נשמרים ב
     d = now.strftime("%Y-%m-%d")
     time =  now.strftime("%H:%M:%S")
     file.write ('Date=' + d)
-    file.write (' Time=' + time)
+    file.write (' Time= + time \n')
     #file.write(' Date=' now.strftime("%Y-%m-%d"))
     var = var + 1
 file.close()
