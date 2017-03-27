@@ -29,7 +29,7 @@ cur.execute('''CREATE TABLE data
 var = 1
 while var <= 5 :
     h,t = dht.read_retry(dht.DHT22, 4)
-    file.write('Temprature={0:0.1f}*C, Humidity={1:0.1f}%'.format(t, h))
+    file.write('Temprature={0:0.1f}*C, Humidity={1:0.1f}% '.format(t, h))
     now = datetime.datetime.now()    #2014-09-26  16:34:40
     print now
     d = now.strftime("%Y-%m-%d")
@@ -47,7 +47,7 @@ while var <= 5 :
 dd = cur.execute("SELECT * FROM data")
 with open('history.csv', 'w') as f:
     writer = csv.writer(f)
-    writer.writerow(['Date','Time'])
+    writer.writerow(['Temprature','Humidity','Date','Time'])
     writer.writerows(dd)
     #f.write(['Date','Time'])
     #f.write('\n')
