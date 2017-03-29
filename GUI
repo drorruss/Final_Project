@@ -1,0 +1,12 @@
+GUI TKINTER
+
+install TKINTER:
+
+option 1 - sudo apt-get install python python-tk idle python-pmw python-imaging   
+option 2 - sudo apt-get install python-tk
+
+
+Tutorial:
+
+https://www.youtube.com/watch?v=RJB1Ek2Ko_Y&list=PL6gx4Cwl9DGBwibXFtPtflztSNPGuIB_d
+
