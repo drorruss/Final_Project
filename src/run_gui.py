@@ -1,5 +1,7 @@
-
+from PyQt4 import QtCore
 from PyQt4 import QtGui # Import the PyQt4 module we'll need
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 import sys # We need sys so that we can pass argv to QApplication
 
 import design # This file holds our MainWindow and all design related things
@@ -9,8 +11,24 @@ import webbrowser
 import subprocess
 import new as script
 import threading
-import datetime
+
+import datetime 
+from datetime import datetime
 import time
+
+class StoppableThread(threading.Thread):
+    """Thread class with a stop() method. The thread itself has to check
+    regularly for the stopped() condition."""
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self._stop_event = threading.Event()
+	self.stop = False
+
+    def run(self):
+	while not self.stop:
+            script.main()
+
 
 class ExampleApp(QtGui.QMainWindow, design.Ui_MainWindow):
 
@@ -20,37 +38,26 @@ class ExampleApp(QtGui.QMainWindow, design.Ui_MainWindow):
         # So please google it if you're not familar with it
         # Simple reason why we use it here is that it allows us to
         # access variables, methods etc in the design.py file
+        self.t1 = None
         super(self.__class__, self).__init__()
         self.setupUi(self)  # This is defined in design.py file automatically
         # It sets up layout and widgets that are defined
-        #self.btnBrowse.clicked.connect(self.browse_folder)  # When the button is pressed
+        # When the button is pressed
         self.btnAddContact.clicked.connect(self.openWebToAddContact)                                                    # Execute browse_folder function
         self.btnHistory.clicked.connect(self.openHistory)
         self.btnStart.clicked.connect(self.runScriptStart)
-        self.btnStop.clicked.connect(self.stop)
+        self.btnStop.clicked.connect(self.btn_stop)
+
+        time = QTime()
+        date = QDate()
         
-       # self.QDateTime.connect(self.defaultTime)
-      #  self.dateTimeEdit.clicked.connect(self.disp_time)
-        #now = QDateTime
-        #now.setTime_t(time.time())
-        #self.time.setDateTime(now)
+        current_t = time.currentTime()
+        current_d = date.currentDate()
+
+        self.timeEdit.setTime(current_t)
+        self.dateEdit.setDate(current_d)
+
       
-  #  def browse_folder(self):
-     #   self.listWidget.clear() # In case there are any existing elements in the list
-      #  directory = QtGui.QFileDialog.getExistingDirectory(self,"Pick a folder")
-        # execute getExistingDirectory dialog and set the directory variable to be equal
-        # to the user selected directory
-
-      #  if directory: # if user didn't pick a directory don't continue
-       #     for file_name in os.listdir(directory): # for all files, if any, in the directory
-        #        self.listWidget.addItem(file_name)  # add file to the listWidget
-
-
-   # def defaultTime(self):
-        # now = QDateTime()
-        # now.setTime_t(time.time())
-        # self.time.setDateTime(now)
-        
     def openWebToAddContact(self):
         webbrowser.open('https://www.twilio.com/console/phone-numbers/verified')
 
@@ -59,19 +66,13 @@ class ExampleApp(QtGui.QMainWindow, design.Ui_MainWindow):
 
         
     def runScriptStart(self):
-        t1 = threading.Thread(target= script.main())
-        t1.start()
-        #t1.join()
-
-    def stop(self):
-        t2 = threading.Thread(target= script.stop())
-        #t2.exit()
-       # t2= threading.Thread(target= script.stop())
-      #  t2.start()
-     #   t2.join()
+        self.t1 = StoppableThread()
+        self.t1.start()
         
-
         
+    def btn_stop(self):
+        self.t1.stop = True
+     
 def main():
     app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
     form = ExampleApp()                 # We set the form to be our ExampleApp (design)
