@@ -16,6 +16,10 @@ import datetime
 from datetime import datetime
 import time
 
+
+
+
+
 class StoppableThread(threading.Thread):
     """Thread class with a stop() method. The thread itself has to check
     regularly for the stopped() condition."""
@@ -47,7 +51,8 @@ class ExampleApp(QtGui.QMainWindow, design.Ui_MainWindow):
         self.btnHistory.clicked.connect(self.openHistory)
         self.btnStart.clicked.connect(self.runScriptStart)
         self.btnStop.clicked.connect(self.btn_stop)
-
+        self.btnContactList.clicked.connect(self.open_contact)
+        #update date and current time from os.
         time = QTime()
         date = QDate()
         
@@ -72,6 +77,11 @@ class ExampleApp(QtGui.QMainWindow, design.Ui_MainWindow):
         
     def btn_stop(self):
         self.t1.stop = True
+
+    def open_contact(self):
+        script.open_contact()
+        os.system('xdg-open /home/pi/Desktop/contact.txt')
+        
      
 def main():
     app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
